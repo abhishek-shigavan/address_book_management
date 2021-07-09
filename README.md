@@ -46,3 +46,11 @@
 12)  Get Count of Person of Particular City -- Displaying Total of Contacts Having City as Given City Name
 
 13)  Get Count of Person of Particular State -- Displaying Total of Contacts Having State as Given State Name 
+
+14)  Sort AddressBook By Person Name  --  Sorting The AddressBook By Person Name & Displaying It
+
+15)  Sort AddressBook By City Of Person --  Sorting The AddressBook By Persons City & Displaying It
+
+16)  Sort AddressBook By State Of Person  --  Sorting The AddressBook By Persons State & Displaying It
+
+17)  Sort AddressBook By Zip Code Of Person --  Sorting The AddressBook By Persons Zip Code & Displaying It         

@@ -109,5 +109,29 @@ public class AddressBookService implements AddressBookServiceInterface {
 		
 		addressDAO.getContactCountByState(stateName);
 	}
+
+	@Override
+	public void viewInSortedByName(String addrName) {
+		
+		addressDAO.viewInSortedByName(addrName);
+	}
+
+	@Override
+	public void viewInSortedByCity(String addrName) {
+		
+		addressDAO.viewInSortedByCity(addrName);
+	}
+
+	@Override
+	public void viewInSortedByState(String addrName) {
+		
+		addressDAO.viewInSortedByState(addrName);
+	}
+
+	@Override
+	public void viewInSortedByZip(String addrName) {
+		
+		addressDAO.viewInSortedByZip(addrName);
+	}
 	
 }

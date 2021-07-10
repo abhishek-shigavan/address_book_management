@@ -4,7 +4,7 @@ import java.util.List;
 import com.addressbook.model.ContactDetails;
 /**
  * AddressBookServiceInterface	--	Defining Abstract methods of all operations 
- * 					performed in AddressBook
+ * 									performed in AddressBook
  * 
  * @author Abhishek Shigavan
  *
@@ -44,5 +44,13 @@ public interface AddressBookServiceInterface {
 	public abstract void getContactCountByCity(String cityName);
 
 	public abstract void getContactCountByState(String stateName);
+
+	public abstract void viewInSortedByName(String addrName);
+
+	public abstract void viewInSortedByCity(String addrName);
+
+	public abstract void viewInSortedByState(String addrName);
+
+	public abstract void viewInSortedByZip(String addrName);
 	
 }

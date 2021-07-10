@@ -14,11 +14,12 @@ public class UserInputOutput {
 	
 	static Scanner sc = new Scanner(System.in);
 /**
- * Method to display menu 
+ * Method to display menu & to take user 
+ * selected option 
  *  	
  * @return chosen option
  */
-	public static int addressBookMenu() {
+	public int addressBookMenu() {
 		
 		System.out.println("\n****MENU****");
 		System.out.println("1. Create New AddressBook ");
@@ -26,15 +27,11 @@ public class UserInputOutput {
 		System.out.println("3. Edit Contact");
 		System.out.println("4. Delete AddressBook");
 		System.out.println("5. Delete Contact");
-		System.out.println("6. View All AddressBook");
-		System.out.println("7. View Specific AddressBook");
-		System.out.println("8. Search Person In City");
-		System.out.println("9. Search Person In State");
-		System.out.println("10. View Contacts by City");
-		System.out.println("11. View Contacts by State");
-		System.out.println("12. Get Count of Person of Particular City");
-		System.out.println("13. Get Count of Person of Particular State");
-		System.out.println("14. Exit");
+		System.out.println("6. View Options");
+		System.out.println("7. Search Person");
+		System.out.println("8. View Count of Person");
+		System.out.println("9. View In Sorted Order");
+		System.out.println("10. Exit");
 		System.out.println("Enter ur option : ");
 		int option = sc.nextInt();
 		
@@ -46,7 +43,7 @@ public class UserInputOutput {
  * 	
  * @return contact object
  */
-	public static ContactDetails contactDetailsConsole() {
+	public ContactDetails contactDetailsConsole() {
 		
 		ContactDetails contactDetails = new ContactDetails();
 		
@@ -80,7 +77,7 @@ public class UserInputOutput {
 		return contactDetails;
 	}
 	//method to get AddressBook Name
-	public static String getAddressBookName() {
+	public String getAddressBookName() {
 		
 		System.out.println("Enter AddressBook Name : ");
 		String addrName = sc.next();
@@ -88,7 +85,7 @@ public class UserInputOutput {
 		return addrName;
 	}
 	//method to get contact name 
-	public static String getContactNameToCheck() {
+	public String getContactNameToCheck() {
 		
 		System.out.println("Enter Contact Name : ");
 		String contactName = sc.next();
@@ -96,7 +93,7 @@ public class UserInputOutput {
 		return contactName;
 	}
 	//method to get AddressBook name to edit
-	public static String getEditAddressBookName() {
+	public String getEditAddressBookName() {
 		
 		System.out.println("Enter Name of AddressBook To Edit : ");
 		String addrName = sc.next();
@@ -104,7 +101,7 @@ public class UserInputOutput {
 		return addrName;
 	}
 	//method to get Contact name to edit
-	public static String getEditContactName() {
+	public String getEditContactName() {
 		
 		System.out.println("Enter Contact Name To Edit : ");
 		String contactName = sc.next();
@@ -112,7 +109,7 @@ public class UserInputOutput {
 		return contactName;
 	}
 	//method to get Contact name to delete
-	public static String getDeleteContactName() {
+	public String getDeleteContactName() {
 		
 		System.out.println("Enter Contact Name To Delete : ");
 		String contactName = sc.next();
@@ -120,7 +117,7 @@ public class UserInputOutput {
 		return contactName;
 	}
 	//method to get contact name to search
-	public static String getSearchContactName() {
+	public String getSearchContactName() {
 	
 		System.out.println("Enter Contact Name To Search In City : ");
 		String contactName = sc.next();
@@ -128,7 +125,7 @@ public class UserInputOutput {
 		return contactName;
 	}
 	//method to get city name 
-	public static String getCityName() {
+	public String getCityName() {
 		
 		System.out.println("\nEnter City Name : ");
 		String cityName = sc.next();
@@ -136,9 +133,9 @@ public class UserInputOutput {
 		return cityName;
 	}
 	//method to get state name
-	public static String getStateName() {
+	public String getStateName() {
 		
-		System.out.println("Enter State Name : ");
+		System.out.println("\nEnter State Name : ");
 		String stateName = sc.next();
 		
 		return stateName;
@@ -170,7 +167,7 @@ public class UserInputOutput {
  * @param existingContactList
  * @return existing contact list with newly added details
  */
-	public static List<ContactDetails> getDetailsForExisting(List<ContactDetails> existingContactList){
+	public List<ContactDetails> getDetailsForExisting(List<ContactDetails> existingContactList){
 		
 		//getting new contact details
 		ContactDetails contactDetails = contactDetailsConsole();
@@ -184,7 +181,7 @@ public class UserInputOutput {
  * 	
  * @return new contact details
  */
-	public static ContactDetails getEditContactDetails() {
+	public ContactDetails getEditContactDetails() {
 		
 		System.out.println("\n****Editing Contact****");
 		System.out.println("Please Enter New Details...");
@@ -192,5 +189,101 @@ public class UserInputOutput {
 		ContactDetails contactDetails = contactDetailsConsole();
 
 		return contactDetails;
-	} 
+	}
+/**
+ * Method to print view menu & to take option 
+ * from user & return the same
+ *  	
+ * @return option selected by user
+ */	
+	public int getViewMenu() {
+		boolean flag = true;
+		
+		while(flag) {
+			System.out.println("\n**** View Options ****");
+			System.out.println("\n1. View All AddressBooks");
+			System.out.println("2. View Specific AddressBook");
+			System.out.println("3. View Contacts By City Name");
+			System.out.println("4. View Contacts By State Name");
+			System.out.println("Enter Ur Option : ");
+			int option = sc.nextInt();
+			
+			if(option > 0 && option < 5) {
+				flag = false;
+				return option;
+			}
+		}
+		return 0;
+	}
+/**
+ * Method to print searching options menu & to take option 
+ * from user & return the same
+ *  	
+ * @return option selected by user
+ */	
+	public int getSearchMenu() {
+		boolean flag = true;
+		
+		while(flag) {
+			System.out.println("\n**** Searching Options ****\n");
+			System.out.println("\n1. Search Person In City ");
+			System.out.println("2. Search Person In State");
+			System.out.println("Enter Ur Option :  ");
+			int option = sc.nextInt();
+			
+			if(option > 0 && option < 3) {
+				flag = false;
+				return option;
+			}
+		}
+		return 0;
+	}
+/**
+ * Method to print view count options menu & to take option 
+ * from user & return the same
+ *  	
+ * @return option selected by user
+ */	
+	public int getCountOfPersonMenu() {
+		boolean flag = true;
+		
+		while(flag) {
+			System.out.println("\n**** View Count Options ****\n");
+			System.out.println("\n1. Get Count Of Person Of City");
+			System.out.println("2. Get Count Of Person Of State");
+			System.out.println("Enter Ur Option : ");
+			int option = sc.nextInt();
+			
+			if(option > 0 && option < 3) {
+				flag = false;
+				return option;
+			}
+		}
+		return 0;
+	}
+/**
+ * Method to print sorted order menu & to
+ * take selected option from user & return the same
+ *  	
+ * @return option selected by user
+ */
+	public int getSortedOrderMenu() {
+		boolean flag = true;
+		
+		while(flag) {
+			System.out.println("\n**** Sorting Option ****");
+			System.out.println("\n1. Sorted By Name");
+			System.out.println("2. Sorted By City");
+			System.out.println("3. Sorted By State");
+			System.out.println("4. Sorted By Zip Code");
+			System.out.println("Enter Ur Option : ");
+			int option = sc.nextInt();
+			
+			if(option > 0 && option < 5) {
+				flag = false;
+				return option;
+			}
+		}
+		return 0;
+	}
 }

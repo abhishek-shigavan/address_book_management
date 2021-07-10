@@ -1,7 +1,7 @@
 package com.addressbook.model;
 /**
  * ContactDetails	--	This class contains method to get & set
- * 				properties of AddressBook field
+ * 						properties of AddressBook field
  * 
  * @author Abhishek Shigavan
  *

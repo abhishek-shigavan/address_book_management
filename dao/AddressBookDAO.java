@@ -1,14 +1,18 @@
 package com.addressbook.dao;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import com.addressbook.model.ContactDetails;
 /**
  * AddressBookDAO	--	This class contains all the methods of 
- * 				operation performed in AddressBook
+ * 						operation performed in AddressBook
  * 
  * @author Abhishek Shigavan
  *
@@ -187,13 +191,9 @@ public class AddressBookDAO {
 	
 		//contact list of given address book
 		List<ContactDetails> contactList = addressBookList.get(addrName);
-		
 		System.out.println("\nAddressBook Name : "+addrName);
-		
-		for(int i=0; i < contactList.size(); i++) {
-			
-			System.out.println(contactList.get(i));
-		}
+		//printing contact list
+		contactList.stream().forEach(System.out::println);
 	}
 /**
  * This method stores all keys (i.e AddressBook Name) of hashMap into arraylist
@@ -221,7 +221,6 @@ public class AddressBookDAO {
  * 		   False - If not present
  */
 	public boolean checkCityPresent(String cityName) {
-		
 		boolean flag = false;
 		
 		//list of all AddressBook Name
@@ -235,14 +234,12 @@ public class AddressBookDAO {
         	//searching city name in the contact list
         	for(int j=0; j < contactList.size(); j++) {
         		
-        		if(contactList.get(i).getCity().equalsIgnoreCase(cityName)) {
-        		
+        		if(contactList.get(j).getCity().equalsIgnoreCase(cityName)) {
         			flag = true;
         			break;
         		}
         	}
         }
-        
         return flag;
 	}
 /**
@@ -255,9 +252,7 @@ public class AddressBookDAO {
  * 		   False - If not present
  */	
 	public boolean checkStatePresent(String stateName) {
-		
 		boolean flag = false;
-		
         List<String> listOfAddrBookName= getListOfKeys();
         
         //iterating through list of AddressBook Name to get contact list of each AddressBook
@@ -268,13 +263,11 @@ public class AddressBookDAO {
         	for(int j=0; j < contactList.size(); j++) {
         		
         		if(contactList.get(j).getState().equalsIgnoreCase(stateName)) {
-        		
         			flag = true;
         			break;
         		}
         	}
         }
-        
         return flag;
 	}
 /**
@@ -283,32 +276,26 @@ public class AddressBookDAO {
  * 	
  * @return dictionary of address book name & contact name 
  */
-	public HashMap<String, List<String>> dictOfAddrBookContactName(){
-		
+	public HashMap<String, List<String>> dictOfAddrBookContactName() {
 		//creating dictionary to store all contact name AddressBook wise 
 		HashMap<String, List<String>> addrContactList = new HashMap<>();
-		
 		//list of AddressBook Name
 		List<String> listOfAddrBookName = getListOfKeys();
 				
 		for(int i=0; i < listOfAddrBookName.size(); i++) {
-			
 			//list of contact list of AddressBook
 			List<ContactDetails> contactList = addressBookList.get(listOfAddrBookName.get(i));
 			//list to store contact name
 			List<String> contactNameList = new ArrayList<>();
 
 			//searching city name in contact list
-			for(int j=0; j < contactList.size(); j++) {
-				
+			for(int j=0; j < contactList.size(); j++) {	
 				//adding contact name into contactName list 
 				contactNameList.add(contactList.get(j).getFirst_Name());
-			}
-			
+			}	
 			//storing contact name list along with AddressBook name  
 			addrContactList.put(listOfAddrBookName.get(i), contactNameList);
 		}
-		
 		return addrContactList;
 	}
 /**
@@ -320,10 +307,8 @@ public class AddressBookDAO {
  * @return Dictionary of city & list of contact 
  */
 	public HashMap<String, List<String>> dictionaryOfCityAndContact(String cityName) {
-		
 		//creating dictionary to store all contact name city wise 
 		HashMap<String, List<String>> cityContactList = new HashMap<>();
-		
 		//list of AddressBook Name
 		List<String> listOfAddrBookName = getListOfKeys();
 		//list to store contact name
@@ -337,8 +322,7 @@ public class AddressBookDAO {
 			//searching city name in contact list
 			for(int j=0; j < contactList.size(); j++) {
 			
-				if(contactList.get(j).getCity().equalsIgnoreCase(cityName)) {
-					
+				if(contactList.get(j).getCity().equalsIgnoreCase(cityName)) {			
 					//adding contact name into list having city name same as given
 					contactNameList.add(contactList.get(j).getFirst_Name());
 				}
@@ -346,7 +330,6 @@ public class AddressBookDAO {
 			//storing contact name list along with city  
 			cityContactList.put(cityName, contactNameList);
 		}
-		
 		return cityContactList;
 	}
 /**
@@ -358,32 +341,26 @@ public class AddressBookDAO {
  * @return Dictionary of state & list of contact 
  */	
 	public HashMap<String, List<String>> dictionaryOfStateAndContact(String stateName) {
-		
 		//creating dictionary to store all contact name state wise
 		HashMap<String, List<String>> stateContactList = new HashMap<>();
-		
 		//list of AddressBook Name
 		List<String> listOfAddrBookName = getListOfKeys();
 		//list to store contact name
 		List<String> contactNameList = new ArrayList<>();
 		
 		for(int i=0; i < listOfAddrBookName.size(); i++) {
-			
 			//contact list of address book
 			List<ContactDetails> contactList = addressBookList.get(listOfAddrBookName.get(i));
-			
 			//searching state name in contact list
 			for(int j=0; j < contactList.size(); j++) {
 			
-				if(contactList.get(j).getState().equalsIgnoreCase(stateName)) {
-					
+				if(contactList.get(j).getState().equalsIgnoreCase(stateName)) {			
 					contactNameList.add(contactList.get(j).getFirst_Name());
 				}
 			}
 			//storing contact name list along with state
 			stateContactList.put(stateName, contactNameList);
 		}
-		
 		return stateContactList;
 	}
 /**
@@ -396,21 +373,16 @@ public class AddressBookDAO {
  * @return No return
  */
 	public void checkContactInCity(String cityName, String contactName) {
-		
 		//dictionary of given city name & its contact name
 		HashMap<String, List<String>> cityContactList = dictionaryOfCityAndContact(cityName);
-		
 		//ContactName list of city
 		List<String> contactList = cityContactList.get(cityName);
-		
 		boolean isPresent = contactList.contains(contactName);
 		
 		if(isPresent) {
-			
 			System.out.println("In City : "+cityName+" Person with Contact Name : "+contactName+" is present");
 		}
 		else {
-			
 			System.out.println("No such person with Contact Name : "+contactName+" Present in City : "+cityName);
 		}
 	}
@@ -424,21 +396,16 @@ public class AddressBookDAO {
  * @return No return
  */	
 	public void checkContactInState(String stateName, String contactName) {
-		
 		//dictionary of given state name & its contact name
 		HashMap<String, List<String>> stateContactList = dictionaryOfStateAndContact(stateName);
-		
 		//ContactName list of state
 		List<String> contactList = stateContactList.get(stateName);
-		
 		boolean isPresent = contactList.contains(contactName);
 		
 		if(isPresent) {
-			
-			System.out.println(" Person with Contact Name : "+contactName+" is present in State : "+stateName);
+			System.out.println("Person with Contact Name : "+contactName+" is present in State : "+stateName);
 		}
 		else {
-			
 			System.out.println("No such person with Contact Name : "+contactName+" Present in State : "+stateName);
 		}
 	}
@@ -450,25 +417,22 @@ public class AddressBookDAO {
  * @param cityName
  */
 	public void viewContactsByCityName(String cityName) {
-		
+		//address books name list
 		List<String> listOfAddrBookName= getListOfKeys();
-	
 		System.out.println("City Name : "+cityName+"\n");
 		
 		for(int i=0; i < listOfAddrBookName.size(); i++) {
-			
+			//contact list of address book
 			List<ContactDetails> contactList = addressBookList.get(listOfAddrBookName.get(i));
 			//searching city name in the contact list
 			for(int j=0; j < contactList.size(); j++) {
 				
 				if(contactList.get(j).getCity().equalsIgnoreCase(cityName)) {
-					
 					System.out.println("AddressBook Name : "+listOfAddrBookName.get(i)+
 							           " First Name : "+contactList.get(j).getFirst_Name()+
 						               " Last Name : "+contactList.get(j).getLast_Name());
 				}
 			}
-			
 		}
 	}
 /**
@@ -479,19 +443,17 @@ public class AddressBookDAO {
  * @param cityName
  */	
 	public void viewContactsByStateName(String stateName) {
-		
+		//address books name list
 		List<String> listOfAddrBookName = getListOfKeys();
-			
 		System.out.println("City Name : "+stateName+"\n");
 				
 		for(int i=0; i < listOfAddrBookName.size(); i++) {
-					
+			//getting contact list of address book		
 			List<ContactDetails> contactList = addressBookList.get(listOfAddrBookName.get(i));
 			//searching state name in the contact list		
 			for(int j=0; j < contactList.size(); j++) {
 						
 				if(contactList.get(j).getState().equalsIgnoreCase(stateName)) {
-							
 					System.out.println("AddressBook Name : "+listOfAddrBookName.get(i)+
 									   " First Name : "+contactList.get(j).getFirst_Name()+
 								       " Last Name : "+contactList.get(j).getLast_Name());
@@ -507,25 +469,21 @@ public class AddressBookDAO {
  * @return No return
  */
 	public void getContactCountByCity(String cityName) {
-		
+		//list of address books name
 		List<String> listOfAddrBookName = getListOfKeys();
-		
 		int cityCount = 0;
 		
 		for(int i=0; i < listOfAddrBookName.size(); i++) {
-			
 			//contact list of address book
 			List<ContactDetails> contactList = addressBookList.get(listOfAddrBookName.get(i));
 			//searching city name in contact list
 			for(int j=0; j < contactList.size(); j++) {
 				
 				if(contactList.get(j).getCity().equalsIgnoreCase(cityName)) {
-					
 					cityCount++;
 				}
 			}
 		}
-		
 		System.out.println("City Name : "+cityName);
 		System.out.println("Total No of Person With City as "+cityName+" in All AddressBook : "+cityCount);
 	}
@@ -537,26 +495,86 @@ public class AddressBookDAO {
  * @return No return
  */	
 	public void getContactCountByState(String stateName) {
-		
+		//list of address books name
 		List<String> listOfAddrBookName = getListOfKeys();
-		
 		int stateCount = 0;
 		
 		for(int i=0; i < listOfAddrBookName.size(); i++) {
-			
 			//contact list of address book
 			List<ContactDetails> contactList = addressBookList.get(listOfAddrBookName.get(i));
 			//searching state name in contact list
 			for(int j=0; j < contactList.size(); j++) {
 				
 				if(contactList.get(j).getState().equalsIgnoreCase(stateName)) {
-					
 					stateCount++;
 				}
 			}
 		}
-		
 		System.out.println("State Name : "+stateName);
 		System.out.println("Total No of Person With State as "+stateName+" in All AddressBook : "+stateCount);
+	}
+/**
+ * This method gets contact list of given address book then 
+ * sort the contact list according to the first name of person
+ * 	
+ * @param addrName - address book name
+ * @return No return
+ */
+	public void viewInSortedByName(String addrName) {
+		//contact list of given address book
+		List<ContactDetails> contactList = addressBookList.get(addrName);
+		
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getFirst_Name))
+					.forEach(System.out::println);
+	}
+/**
+ * This method gets contact list of given address book then 
+ * sort the contact list according to the city name of person
+ * 	
+ * @param addrName - address book name
+ * @return No return
+ */	
+	public void viewInSortedByCity(String addrName) {
+		//contact list of given address book
+		List<ContactDetails> contactList = addressBookList.get(addrName);
+				
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getCity))
+					.forEach(System.out::println);
+	}
+/**
+ * This method gets contact list of given address book then 
+ * sort the contact list according to the state name of person
+ * 	
+ * @param addrName - address book name
+ * @return No return
+ */	
+	public void viewInSortedByState(String addrName) {
+		//contact list of given address book
+		List<ContactDetails> contactList = addressBookList.get(addrName);
+				
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getState))
+				.forEach(System.out::println);		
+	}
+/**
+ * This method gets contact list of given address book then 
+ * sort the contact list according to the zip code of person
+ * 	
+ * @param addrName - address book name
+ * @return No return
+ */	
+	public void viewInSortedByZip(String addrName) {
+		//contact list of given address book
+		List<ContactDetails> contactList = addressBookList.get(addrName);
+				
+		contactList.stream().sorted(Comparator.comparingInt(ContactDetails::getZip_Code))
+					.forEach(System.out::println);		
+	}
+	
+	public void printKeyList() {
+		
+		List<String>keyList = getListOfKeys();
+		System.out.println(keyList.size());
+		
+		keyList.stream().forEach(System.out::println);
 	}
 }

@@ -7,297 +7,291 @@ import com.addressbook.service.AddressBookServiceInterface;
 import com.addressbook.util.UserInputOutput;
 /**
  * AddressBook	--	This class calls method according to
- * 			operation perform in AddressBook chosen by user
+ * 					operation perform in AddressBook chosen by user
  * 
  * @author Abhishek Shigavan
  *
  */
 public class AddressBook {
 	
-	static AddressBookServiceInterface addressBookService = new AddressBookService();
+	AddressBookServiceInterface addressBookService = new AddressBookService();
 
 	public void showAddressBookMenu() {
-		
 		UserInputOutput userIO = new UserInputOutput();
-		
 		boolean flag = true;
+		int choice = 0;
 		
 		while(flag) {
-			
-			int option = UserInputOutput.addressBookMenu();
+			int option = userIO.addressBookMenu();
 			
 			switch(option) {
-				
 				case 1:{
-					
-					String addrName = UserInputOutput.getAddressBookName();
+					String addrName = userIO.getAddressBookName();
 					//checking AddressBook is present / not
 					boolean isPresent = addressBookService.isAddressBookPresent(addrName);
 					
 					if (isPresent) {
-						
 						System.out.println("AddressBook with "+addrName+" is already present");
 					}
-					else {	
-						
+					else {		
 						List<ContactDetails> contactList = userIO.getNewContactDetails();
 						addressBookService.addAddressBook(addrName,contactList);
 					}
-					
 					break;
 				}
 				case 2:{
-					
-					String addrName = UserInputOutput.getAddressBookName();
+					String addrName = userIO.getAddressBookName();
 					//checking AddressBook is present / not
-					boolean isPresent = addressBookService.isAddressBookPresent(addrName);
-					
-					String contactName  = UserInputOutput.getContactNameToCheck();
+					boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
+					String contactName  = userIO.getContactNameToCheck();
 					//checking contact name is present in address book / not
 					boolean isContactPresent = addressBookService.isContactPresent(addrName, contactName);
 					
-					if(isPresent == true && isContactPresent == false) {
-						
+					if(isAddrPresent == true && isContactPresent == false) {
 						//getting existing contact list
 						List<ContactDetails> existingContactList = addressBookService.getExistingContactList(addrName);
 						//contact list with newly added contact
-						List<ContactDetails> contactList = UserInputOutput.getDetailsForExisting(existingContactList);
-						
+						List<ContactDetails> contactList = userIO.getDetailsForExisting(existingContactList);
 						addressBookService.addAddressBook(addrName, contactList);
 					}
 					else if(isContactPresent) {
-						
 						System.out.println("Contact with Name :"+contactName+" is already present in AddressBook : "+addrName);
 					}
-					else {
-						
+					else {	
 						System.out.println("No such AddressBook with name "+addrName);
 					}
-					
 					break;
 				}
 				case 3:{
-					
-					String addrName = UserInputOutput.getEditAddressBookName();	
+					System.out.println("\n**** Editing Contact ****\n");
+					String addrName = userIO.getEditAddressBookName();	
 					//checking AddressBook is present / not
 					boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
-					
-					String contactName = UserInputOutput.getEditContactName();
+					String contactName = userIO.getEditContactName();
 					//checking contact is present / not
 					boolean isContactPresent = addressBookService.isContactPresent(addrName, contactName);
 					
 					if(isAddrPresent && isContactPresent) {
-						
 						//getting new contact details
-						ContactDetails contactDetails = UserInputOutput.getEditContactDetails();
+						ContactDetails contactDetails = userIO.getEditContactDetails();
 						addressBookService.editContactDetails(addrName, contactName, contactDetails);
 					}
 					else if(isAddrPresent) {
-						
 						System.out.println("No such Contact with First Name as "+contactName+" Present in AddressBook");
 					}
-					else {
-						
+					else {	
 						System.out.println("No such AddressBook with Name : "+addrName);
 					}
-					
 					break;
 				}
 				case 4:{
-					
 					System.out.println("\n**** Deleting Address Book ****");
-					
-					String addrName = UserInputOutput.getAddressBookName();
+					String addrName = userIO.getAddressBookName();
 					//checking AddressBook is present / not
 					boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
 					
 					if(isAddrPresent) {
-						
 						addressBookService.deleteAddressBook(addrName);
 					}
-					else {
-						
+					else {	
 						System.out.println("No such AddressBook with Name : "+addrName);
 					}
-					
 					break;
 				}
 				case 5:{
-					
 					System.out.println("**** Deleting Contact ****");
-					
-					String addrName = UserInputOutput.getAddressBookName();	
+					String addrName = userIO.getAddressBookName();	
 					//checking AddressBook is present / not
 					boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
-					
-					String contactName = UserInputOutput.getDeleteContactName();
+					String contactName = userIO.getDeleteContactName();
 					//checking Contact is present / not
 					boolean isContactPresent = addressBookService.isContactPresent(addrName, contactName);
 					
 					if(isAddrPresent && isContactPresent) {
-						
 						addressBookService.deleteContact(addrName, contactName);
 					}
 					else if(isAddrPresent) {
-						
 						System.out.println("No such Contact with First Name as "+contactName+" Present in AddressBook");
 					}
 					else {
-						
 						System.out.println("No such AddressBook with Name : "+addrName);
 					}
-
 					break;
 				}
-				case 6:{
+				case 6:{		
+					System.out.println("\n**** View ****");
 					
-					System.out.println("\n**** Displaying All AddressBooks ****");
-					
-					addressBookService.viewAddressBook();
+					choice = userIO.getViewMenu();
+					switch(choice) {
+						case 1:{
+							System.out.println("\n**** Displaying All AddressBook ****");
+							addressBookService.viewAddressBook();
+							break;
+						}
+						case 2:{
+							System.out.println("\n**** Displaying Specific AddressBook ****");
+							String addrName = userIO.getAddressBookName();	
+							//checking AddressBook is present / not
+							boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
+							
+							if(isAddrPresent) {
+								addressBookService.viewSpecificAddressBook(addrName);
+							}
+							else {
+								System.out.println("No such AddressBook with Name : "+addrName);
+							}
+							break;
+						}
+						case 3:{
+							System.out.println("\n**** View Contacts By City ****");
+							String cityName = userIO.getCityName();
+							//checking city is present in AddressBook / not
+							boolean isCityPresent = addressBookService.checkCityPresent(cityName);
+							
+							if(isCityPresent) {
+								addressBookService.viewContactsByCityName(cityName);
+							}
+							else {
+								System.out.println("No such City with Name : "+cityName+" present in AddressBook");
+							}
+							break;
+						}
+						case 4:{
+							System.out.println("\n**** View Contacts By State ****");
+							String stateName = userIO.getStateName();
+							//checking state is present in AddressBook / not
+							boolean isStatePresent = addressBookService.checkStatePresent(stateName);
+							
+							if(isStatePresent) {
+								addressBookService.viewContactsByStateName(stateName);
+							}
+							else {
+								System.out.println("No such State with Name : "+stateName+" present in AddressBook");
+							}
+							break;
+						}
+					}
 					break;
 				}
 				case 7:{
-					
-					System.out.println("\n**** Displaying Specific AddressBook ****");
-					
-					String addrName = UserInputOutput.getAddressBookName();	
-					//checking AddressBook is present / not
-					boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
-					
-					if(isAddrPresent) {
-						
-						addressBookService.viewSpecificAddressBook(addrName);
+					System.out.println("\n**** Searching Person ****");
+				
+					choice = userIO.getSearchMenu();	
+					switch(choice) {
+						case 1:{
+							System.out.println("\n**** Searching Person By City Name ****");
+							//getting city & contact name
+							String cityName = userIO.getCityName();
+							String contactName = userIO.getSearchContactName();
+							//checking city is present in AddressBook / not
+							boolean isCityPresent = addressBookService.checkCityPresent(cityName);
+							
+							if(isCityPresent) {
+								addressBookService.checkContactInCity(cityName, contactName);
+							}
+							else {
+								System.out.println("No such City with Name : "+cityName+" present in AddressBook");
+							}
+							break;
+						}
+						case 2:{
+							System.out.println("\n**** Searching Person By State Name ****");
+							//getting state & contact name
+							String stateName = userIO.getStateName();
+							String contactName = userIO.getSearchContactName();
+							//checking state is present in AddressBook / not
+							boolean isStatePresent = addressBookService.checkStatePresent(stateName);
+							
+							if(isStatePresent) {
+								addressBookService.checkContactInState(stateName, contactName);
+							}
+							else {
+								System.out.println("No such State with Name : "+stateName+" present in AddressBook");
+							}
+							break;
+						}
 					}
-					else {
-						
-						System.out.println("No such AddressBook with Name : "+addrName);
-					}
-					
 					break;
 				}
 				case 8:{
+					System.out.println("\n**** View Count Of Person ****");
 					
-					//getting city & contact name
-					String cityName = UserInputOutput.getCityName();
-					String contactName = UserInputOutput.getSearchContactName();
-					
-					//checking city is present in AddressBook / not
-					boolean isCityPresent = addressBookService.checkCityPresent(cityName);
-					
-					if(isCityPresent) {
-						
-						addressBookService.checkContactInCity(cityName, contactName);
-					}
-					else {
-					
-						System.out.println("No such City with Name : "+cityName+" present in AddressBook");
+					choice = userIO.getCountOfPersonMenu();
+					switch(choice) {
+						case 1:{
+							System.out.println("\n**** Displaying Count Of Persons Of City ****\n");
+							String cityName = userIO.getCityName();
+							//checking city is present in AddressBook / not
+							boolean isCityPresent = addressBookService.checkCityPresent(cityName);
+							
+							if(isCityPresent) {
+								addressBookService.getContactCountByCity(cityName);
+							}
+							else {
+								System.out.println("No such City with Name : "+cityName+" present in AddressBook");
+							}
+							break;
+						}
+						case 2:{
+							System.out.println("\n**** Displaying Count Of Persons Of State ****");
+							String stateName = userIO.getStateName();
+							//checking state is present in AddressBook / not
+							boolean isStatePresent = addressBookService.checkStatePresent(stateName);
+							
+							if(isStatePresent) {
+								addressBookService.getContactCountByState(stateName);
+							}
+							else {	
+								System.out.println("No such State with Name : "+stateName+" present in AddressBook");
+							}
+							break;
+						}
 					}
 					break;
 				}
 				case 9:{
+					System.out.println("\n**** View AddressBook In Sorted Order ****");
 					
-					//getting state & contact name
-					String stateName = UserInputOutput.getStateName();
-					String contactName = UserInputOutput.getSearchContactName();
+					String addrName = userIO.getAddressBookName();	
+					//checking AddressBook is present / not
+					boolean isAddrPresent = addressBookService.isAddressBookPresent(addrName);
 					
-					//checking state is present in AddressBook / not
-					boolean isStatePresent = addressBookService.checkStatePresent(stateName);
-					
-					if(isStatePresent) {
+					if(isAddrPresent) {
+						choice = userIO.getSortedOrderMenu();
 						
-						addressBookService.checkContactInState(stateName, contactName);
+						switch(choice) {
+							case 1:{
+								System.out.println("\n**** AddressBook Sorted By Name Of Person ****\n");
+								addressBookService.viewInSortedByName(addrName);
+								break;
+							}
+							case 2:{
+								System.out.println("\n**** AddressBook Sorted By City Name ****\n");
+								addressBookService.viewInSortedByCity(addrName);
+								break;
+							}
+							case 3:{
+								System.out.println("\n**** AddressBook Sorted By State Name ****\n");
+								addressBookService.viewInSortedByState(addrName);
+								break;
+							}
+							case 4:{
+								System.out.println("\n**** AddressBook Sorted By Zip Code ****\n");
+								addressBookService.viewInSortedByZip(addrName);
+								break;
+							}
+						}
 					}
 					else {
-						
-						System.out.println("No such State with Name : "+stateName+" present in AddressBook");
+						System.out.println("No such AddressBook with name : "+addrName);
 					}
 					break;
 				}
 				case 10:{
-					
-					System.out.println("\n**** View Contacts By City ****");
-					String cityName = UserInputOutput.getCityName();
-					
-					//checking city is present in AddressBook / not
-					boolean isCityPresent = addressBookService.checkCityPresent(cityName);
-					
-					if(isCityPresent) {
-						
-						addressBookService.viewContactsByCityName(cityName);
-					}
-					else {
-						
-						System.out.println("No such City with Name : "+cityName+" present in AddressBook");
-					}
-					
-					break;
-				}
-				case 11:{
-					
-					System.out.println("\n**** View Contacts By State ****");
-					String stateName = UserInputOutput.getStateName();
-					
-					//checking state is present in AddressBook / not
-					boolean isStatePresent = addressBookService.checkStatePresent(stateName);
-					
-					if(isStatePresent) {
-						
-						addressBookService.viewContactsByStateName(stateName);
-					}
-					else {
-						
-						System.out.println("No such State with Name : "+stateName+" present in AddressBook");
-					}
-					
-					break;
-				}
-				case 12:{
-					
-					System.out.println("\n**** Display Count Of Persons Of City ****");
-					
-					String cityName = UserInputOutput.getCityName();
-					
-					//checking city is present in AddressBook / not
-					boolean isCityPresent = addressBookService.checkCityPresent(cityName);
-					
-					if(isCityPresent) {
-						
-						addressBookService.getContactCountByCity(cityName);
-					}
-					else {
-						
-						System.out.println("No such City with Name : "+cityName+" present in AddressBook");
-					}
-					
-					break;
-				}
-				case 13:{
-					
-					System.out.println("\n**** Display Count Of Persons Of State ****");
-					
-					String stateName = UserInputOutput.getStateName();
-					
-					//checking state is present in AddressBook / not
-					boolean isStatePresent = addressBookService.checkStatePresent(stateName);
-					
-					if(isStatePresent) {
-						
-						addressBookService.getContactCountByState(stateName);
-					}
-					else {
-						
-						System.out.println("No such State with Name : "+stateName+" present in AddressBook");
-					}
-
-					break;
-				}
-				case 14:{
-					
 					flag = false;
 					break;
 				}
 				default: {
-					
 					System.out.println("Incorrect Option");
 				}
 			}
@@ -305,11 +299,9 @@ public class AddressBook {
 	}
 	
 	public static void main(String[] args) {
-		
 		System.out.println("****Welcome To Address Book Management****");
 		
 		AddressBook addressBook = new AddressBook();
-		
 		addressBook.showAddressBookMenu();
 	}
 }

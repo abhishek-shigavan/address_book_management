@@ -1,4 +1,5 @@
 package com.addressbook.model;
+
 /**
  * ContactDetails	--	This class contains method to get & set
  * 						properties of AddressBook field
@@ -14,16 +15,14 @@ public class ContactDetails {
 	private String address;
 	private String city;
 	private String state;
-	private int zip_Code;
-	private int mob_No;
+	private String zip_Code;
+	private String mob_No;
 	private String email;
+	
+	public ContactDetails() {}
 		
-	public ContactDetails() {
-		
-	}
-		
-	public ContactDetails(String first_Name, String last_Name, String address, String city, String state, int zip_Code,
-				          int mob_No, String email) {
+	public ContactDetails(String first_Name, String last_Name, String address, String city, String state, String zip_Code,
+				          String mob_No, String email) {
 			
 		this.first_Name = first_Name;
 		this.last_Name = last_Name;
@@ -86,22 +85,22 @@ public class ContactDetails {
 	}
 
 	//To get zip code value
-	public int getZip_Code() {
+	public String getZip_Code() {
 		return zip_Code;
 	}
 
 	//To set zip code value
-	public void setZip_Code(int zip_Code) {
+	public void setZip_Code(String zip_Code) {
 		this.zip_Code = zip_Code;
 	}
 
 	//To get mobile no value
-	public int getMob_No() {
+	public String getMob_No() {
 		return mob_No;
 	}
 
 	//To set mobile no value
-	public void setMob_No(int mob_No) {
+	public void setMob_No(String mob_No) {
 		this.mob_No = mob_No;
 	}
 

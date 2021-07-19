@@ -1,5 +1,6 @@
 package com.addressbook.controller;
 
+import java.io.File;
 import java.util.List;
 import com.addressbook.model.ContactDetails;
 import com.addressbook.service.AddressBookService;
@@ -34,7 +35,7 @@ public class AddressBook {
 						System.out.println("AddressBook with "+addrName+" is already present");
 					}
 					else {		
-						List<ContactDetails> contactList = userIO.getNewContactDetails();
+						List<ContactDetails> contactList = userIO.getNewContactDetails(addrName);
 						addressBookService.addAddressBook(addrName,contactList);
 					}
 					break;
@@ -51,7 +52,7 @@ public class AddressBook {
 						//getting existing contact list
 						List<ContactDetails> existingContactList = addressBookService.getExistingContactList(addrName);
 						//contact list with newly added contact
-						List<ContactDetails> contactList = userIO.getDetailsForExisting(existingContactList);
+						List<ContactDetails> contactList = userIO.getDetailsForExisting(existingContactList, addrName);
 						addressBookService.addAddressBook(addrName, contactList);
 					}
 					else if(isContactPresent) {
@@ -73,7 +74,7 @@ public class AddressBook {
 					
 					if(isAddrPresent && isContactPresent) {
 						//getting new contact details
-						ContactDetails contactDetails = userIO.getEditContactDetails();
+						ContactDetails contactDetails = userIO.getEditContactDetails(addrName);
 						addressBookService.editContactDetails(addrName, contactName, contactDetails);
 					}
 					else if(isAddrPresent) {

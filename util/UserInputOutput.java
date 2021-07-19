@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.addressbook.dao.AddressBookDAO;
 import com.addressbook.model.ContactDetails;
+import com.addressbook.readwrite.CSVReaderWriter;
 /**
  * UserInputOutput	--	Defining methods to take input from user
  * 
@@ -17,6 +18,7 @@ public class UserInputOutput {
 	
 	static Scanner sc = new Scanner(System.in);
 	FileReaderWriter fileReadWrite = new FileReaderWriter();
+	CSVReaderWriter csvReadWrite = new CSVReaderWriter();
 /**
  * Method to display menu & to take user 
  * selected option 
@@ -70,15 +72,18 @@ public class UserInputOutput {
 		contactDetails.setState(sc.next());
 						
 		System.out.println("Enter Zip Code : ");
-		contactDetails.setZip_Code(sc.nextInt());
+		contactDetails.setZip_Code(sc.next());
 						
 		System.out.println("Enter Mobile Number : ");
-		contactDetails.setMob_No(sc.nextLong());
+		contactDetails.setMob_No(sc.next());
 						
 		System.out.println("Enter Email Id : ");
 		contactDetails.setEmail(sc.next());
 		//writing AddressBookName & contact details into file
 		fileReadWrite.addToFile(addrName, contactDetails);
+		//writing AddressBookName & contact details into csv file
+		csvReadWrite.writeIntoCSV(addrName, contactDetails);
+		
 		return contactDetails;
 	}
 	//method to get AddressBook Name

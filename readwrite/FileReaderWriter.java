@@ -8,7 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import com.addressbook.model.ContactDetails;
-
+/**
+ * FileReaderWriter	-	Writing Contact & Name of AddressBook into file & reading that file
+ * 
+ * @author Abhishek Shigavan
+ *
+ */
 public class FileReaderWriter {
 	//defining path of file to write data 
 	public static final File fileAsDatabase = new File("./src/com/addressbook/file/contactFileTxt.txt");

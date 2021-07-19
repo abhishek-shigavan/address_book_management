@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import com.addressbook.model.ContactDetails;
 /**
@@ -18,7 +16,6 @@ import com.addressbook.model.ContactDetails;
  *
  */
 public class AddressBookDAO {
-	
 	//defining HashMap to store Multiple AddressBook
 	HashMap<String, List<ContactDetails>> addressBookList = new HashMap<>();
 	
@@ -53,7 +50,7 @@ public class AddressBookDAO {
 	public void addAddressBook(String addrName, List<ContactDetails> contactList) {
 		
 		//storing AddressBook name & Contact details 
-		addressBookList.put(addrName, contactList);
+		addressBookList.put(addrName, contactList);		
 	}
 /**
  * This method checks given contact name present
@@ -566,7 +563,7 @@ public class AddressBookDAO {
 		//contact list of given address book
 		List<ContactDetails> contactList = addressBookList.get(addrName);
 				
-		contactList.stream().sorted(Comparator.comparingInt(ContactDetails::getZip_Code))
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getZip_Code))
 					.forEach(System.out::println);		
 	}
 	

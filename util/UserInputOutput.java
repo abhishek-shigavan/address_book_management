@@ -3,6 +3,8 @@ package com.addressbook.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.addressbook.dao.AddressBookDAO;
 import com.addressbook.model.ContactDetails;
 /**
  * UserInputOutput	--	Defining methods to take input from user
@@ -10,9 +12,11 @@ import com.addressbook.model.ContactDetails;
  * @author Abhishek Shigavan
  *
  */
+import com.addressbook.readwrite.FileReaderWriter;
 public class UserInputOutput {
 	
 	static Scanner sc = new Scanner(System.in);
+	FileReaderWriter fileReadWrite = new FileReaderWriter();
 /**
  * Method to display menu & to take user 
  * selected option 
@@ -43,7 +47,7 @@ public class UserInputOutput {
  * 	
  * @return contact object
  */
-	public ContactDetails contactDetailsConsole() {
+	public ContactDetails contactDetailsConsole(String addrName) {
 		
 		ContactDetails contactDetails = new ContactDetails();
 		
@@ -69,11 +73,12 @@ public class UserInputOutput {
 		contactDetails.setZip_Code(sc.nextInt());
 						
 		System.out.println("Enter Mobile Number : ");
-		contactDetails.setMob_No(sc.nextInt());
+		contactDetails.setMob_No(sc.nextLong());
 						
 		System.out.println("Enter Email Id : ");
 		contactDetails.setEmail(sc.next());
-		
+		//writing AddressBookName & contact details into file
+		fileReadWrite.addToFile(addrName, contactDetails);
 		return contactDetails;
 	}
 	//method to get AddressBook Name
@@ -148,9 +153,9 @@ public class UserInputOutput {
  *  	
  * @return contact list
  */
-	public List<ContactDetails> getNewContactDetails() {
+	public List<ContactDetails> getNewContactDetails(String addrName) {
 		
-		ContactDetails contactDetails = contactDetailsConsole();
+		ContactDetails contactDetails = contactDetailsConsole(addrName);
 		
 		List<ContactDetails> contactList = new ArrayList<>(); 
 		
@@ -167,10 +172,10 @@ public class UserInputOutput {
  * @param existingContactList
  * @return existing contact list with newly added details
  */
-	public List<ContactDetails> getDetailsForExisting(List<ContactDetails> existingContactList){
+	public List<ContactDetails> getDetailsForExisting(List<ContactDetails> existingContactList, String addrName){
 		
 		//getting new contact details
-		ContactDetails contactDetails = contactDetailsConsole();
+		ContactDetails contactDetails = contactDetailsConsole(addrName);
 		//adding new details to existing contact list
 		existingContactList.add(contactDetails);
 		
@@ -181,12 +186,12 @@ public class UserInputOutput {
  * 	
  * @return new contact details
  */
-	public ContactDetails getEditContactDetails() {
+	public ContactDetails getEditContactDetails(String addrName) {
 		
 		System.out.println("\n****Editing Contact****");
 		System.out.println("Please Enter New Details...");
-		
-		ContactDetails contactDetails = contactDetailsConsole();
+	
+		ContactDetails contactDetails = contactDetailsConsole(addrName);
 
 		return contactDetails;
 	}

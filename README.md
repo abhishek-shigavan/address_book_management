@@ -6,16 +6,30 @@
                       This class handles all user request
 
 2) DAO  --  AddressBookDAO  --
-                  This class contains methods of all the operations performed in AddressBook
+                  This class contains methods of all the operations performed in 
 
-3) Model  --  ContactDetails  --
+3) File --  I) contactFileTxt --
+                    Text file containing AddressBook name & its corresponding contact
+            II) contactCSVFile --
+                    CSV format file containing AddressBook name & its corresponding contact
+            III) contactJSONFile  --
+                      Json file containing AddressBook name & its corresponding contact
+
+4) Model  --  ContactDetails  --
                     This class contains methods to get & set properties of contact 
 
-4) Service  --  I) AddressBookService --
+5) ReadWrite  --  I)  CSVReaderWriter --           
+                            This class contains methods to read & write contacts into Csv file 
+                  II) FileReaderWrite --
+                            This class contains methods to read & write contacts into file
+                  III) JSONReaderWriter --
+                            This class contains methods to read & write contacts into Json file
+
+6) Service  --  I) AddressBookService --
                 II) AddressBookServiceInterface --
                           This class contains abstract methods
                           
-5)  Util  --  UserInputOutput --
+7)  Util  --  UserInputOutput --
                     This class contains methods to take input from console                
 
 

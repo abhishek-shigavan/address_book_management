@@ -3,121 +3,118 @@ package com.addressbook.model;
 /**
  * ContactDetails	--	This class contains method to get & set
  * 						properties of AddressBook field
- * 
- * @author Abhishek Shigavan
  *
+ * @author Abhishek Shigavan
  */
 public class ContactDetails {
-	
-	//defining contact field
-	private String first_Name;
-	private String last_Name;
-	private String address;
-	private String city;
-	private String state;
-	private String zip_Code;
-	private String mob_No;
-	private String email;
-	
-	public ContactDetails() {}
-		
-	public ContactDetails(String first_Name, String last_Name, String address, String city, String state, String zip_Code,
-				          String mob_No, String email) {
-			
-		this.first_Name = first_Name;
-		this.last_Name = last_Name;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip_Code = zip_Code;
-		this.mob_No = mob_No;
-		this.email = email;
-	}
+    //defining contact field
+    private String first_Name;
+    private String last_Name;
+    private String address;
+    private String city;
+    private String state;
+    private String zip_Code;
+    private String mob_No;
+    private String email;
 
-	//To get first name value
-	public String getFirst_Name() {
-		return first_Name;
-	}
+    public ContactDetails() {}
 
-	//To set first name value
-	public void setFirst_Name(String first_Name) {
-		this.first_Name = first_Name;
-	}
+    public ContactDetails(String first_Name, String last_Name, String address, String city, String state, String zip_Code,
+                          String mob_No, String email) {
 
-	//To get last name value
-	public String getLast_Name() {
-		return last_Name;
-	}
+        this.first_Name = first_Name;
+        this.last_Name = last_Name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip_Code = zip_Code;
+        this.mob_No = mob_No;
+        this.email = email;
+    }
 
-	//To set last name value
-	public void setLast_Name(String last_Name) {
-		this.last_Name = last_Name;
-	}
+    //To get first name value
+    public String getFirst_Name() {
+        return first_Name;
+    }
 
-	//To get address value
-	public String getAddress() {
-		return address;
-	}
+    //To set first name value
+    public void setFirst_Name(String first_Name) {
+        this.first_Name = first_Name;
+    }
 
-	//To set address value
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    //To get last name value
+    public String getLast_Name() {
+        return last_Name;
+    }
 
-	//To get city value
-	public String getCity() {
-		return city;
-	}
+    //To set last name value
+    public void setLast_Name(String last_Name) {
+        this.last_Name = last_Name;
+    }
 
-	//To set city value
-	public void setCity(String city) {
-		this.city = city;
-	}
+    //To get address value
+    public String getAddress() {
+        return address;
+    }
 
-	//To get state value
-	public String getState() {
-		return state;
-	}
+    //To set address value
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	//To set state vale
-	public void setState(String state) {
-		this.state = state;
-	}
+    //To get city value
+    public String getCity() {
+        return city;
+    }
 
-	//To get zip code value
-	public String getZip_Code() {
-		return zip_Code;
-	}
+    //To set city value
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	//To set zip code value
-	public void setZip_Code(String zip_Code) {
-		this.zip_Code = zip_Code;
-	}
+    //To get state value
+    public String getState() {
+        return state;
+    }
 
-	//To get mobile no value
-	public String getMob_No() {
-		return mob_No;
-	}
+    //To set state vale
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	//To set mobile no value
-	public void setMob_No(String mob_No) {
-		this.mob_No = mob_No;
-	}
+    //To get zip code value
+    public String getZip_Code() {
+        return zip_Code;
+    }
 
-	//To get email value
-	public String getEmail() {
-		return email;
-	}
+    //To set zip code value
+    public void setZip_Code(String zip_Code) {
+        this.zip_Code = zip_Code;
+    }
 
-	//To set email value
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    //To get mobile no value
+    public String getMob_No() {
+        return mob_No;
+    }
 
-	public String toString() {
-		return "ContactDetails [ First Name : " + first_Name + ", Last Name : " + last_Name + ", Address : " + address
-					+ ", City : " + city + ", State : " + state + ", Zip Code : " + zip_Code + ", Mobile No : " + mob_No + ", Email Id :"
-					+ email + "]";
-	}
+    //To set mobile no value
+    public void setMob_No(String mob_No) {
+        this.mob_No = mob_No;
+    }
 
+    //To get email value
+    public String getEmail() {
+        return email;
+    }
+
+    //To set email value
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String toString() {
+        return "ContactDetails [ First Name : " + first_Name + ", Last Name : " + last_Name + ", Address : " + address
+                + ", City : " + city + ", State : " + state + ", Zip Code : " + zip_Code + ", Mobile No : " + mob_No + ", Email Id :"
+                + email + "]";
+    }
 }

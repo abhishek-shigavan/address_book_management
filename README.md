@@ -8,24 +8,34 @@
 2) DAO  --  AddressBookDAO  --
                   This class contains methods of all the operations performed in 
 
-3) File --  I) contactFileTxt --
+3) File --  
+            
+            I) contactFileTxt --
                     Text file containing AddressBook name & its corresponding contact
+            
             II) contactCSVFile --
                     CSV format file containing AddressBook name & its corresponding contact
+            
             III) contactJSONFile  --
                       Json file containing AddressBook name & its corresponding contact
 
 4) Model  --  ContactDetails  --
                     This class contains methods to get & set properties of contact 
 
-5) ReadWrite  --  I)  CSVReaderWriter --           
+5) ReadWrite  --  
+                  
+                  I)  CSVReaderWriter --           
                             This class contains methods to read & write contacts into Csv file 
+                  
                   II) FileReaderWrite --
                             This class contains methods to read & write contacts into file
+                  
                   III) JSONReaderWriter --
                             This class contains methods to read & write contacts into Json file
 
-6) Service  --  I) AddressBookService --
+6) Service  --  
+                
+                I) AddressBookService --
                 II) AddressBookServiceInterface --
                           This class contains abstract methods
                           
